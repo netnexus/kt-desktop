@@ -1,0 +1,57 @@
+<form>
+
+    <legend class="uk-legend">Neue Überweisung</legend>
+
+    <div class="uk-margin">
+        <ng-autocomplete (selected)="selectRecipient($event)" [group]="group" required="required"></ng-autocomplete>
+    </div>
+
+    <div class="uk-margin">
+        <input class="uk-input" type="text" placeholder="IBAN (Empfänger)" [(ngModel)]="iban" name="iban"
+               [disabled]="waitForConfirmation"
+               required="required">
+    </div>
+
+    <div class="uk-margin">
+        <input class="uk-input" type="text" placeholder="Betrag" [(ngModel)]="amount" name="amount"
+               [disabled]="waitForConfirmation"
+               min="0.00" max="50000.00" step="0.01" required="required"
+               currencyMask
+               [options]="{ prefix: '', suffix: '€', thousands: '.', decimal: ',', allowNegative: false, allowZero: false }"
+        >
+    </div>
+
+    <div class="uk-margin">
+        <textarea class="uk-textarea" rows="5" placeholder="Verwendungszweck" [(ngModel)]="note" name="note"
+                  [disabled]="waitForConfirmation"
+                  required="required"></textarea>
+    </div>
+
+    <div class="uk-margin" [hidden]="!waitForConfirmation">
+        <div class="uk-inline">
+            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+            <input class="uk-input" type="text" placeholder="TAN" [(ngModel)]="tan" name="tan">
+        </div>
+    </div>
+
+
+    <div *ngIf="errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    <p class="uk-button-group">
+        <button (click)="close()" class="uk-button uk-button-default">Abbrechen</button>
+        <button *ngIf="!waitForConfirmation" (click)="submit()" class="uk-button uk-button-primary">Senden</button>
+        <button *ngIf="waitForConfirmation" (click)="confirm()" class="uk-button uk-button-primary">Bestätigen</button>
+    </p>
+
+</form>
+
+<ng-template #dropdownValue let-value let-hightlight="highlight">
+    <div [innerHTML]="hightlight"></div>
+    {{value.original.iban}}
+</ng-template>
+
+<ng-template #placeholderValue let-value>
+    {{value.original.name}}
+</ng-template>

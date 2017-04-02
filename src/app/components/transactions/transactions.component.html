@@ -1,0 +1,103 @@
+<ul class="uk-tab" data-uk-tab="{connect:'#mainTabs'}">
+    <li><a href="">Überweisungen</a></li>
+    <li><a href="">Daueraufträge</a></li>
+</ul>
+<ul id="mainTabs" class="uk-switcher uk-margin">
+    <li>
+        <table class="uk-table uk-table-striped uk-table-small uk-table-divider">
+            <thead>
+            <tr>
+                <th class="uk-table-shrink">
+                    <a uk-icon="search" id="searchicon" (click)="this.options.hidden = !this.options.hidden"></a>
+                </th>
+                <th class="uk-table-expand">Name / Verwendungszweck
+                    <div #options [hidden]="true" class="uk-margin-small-top">
+                        <div class="uk-margin">
+                            <input class="uk-input" type="search" name="search" [(ngModel)]="filter"
+                                   placeholder="Suchen...">
+                        </div>
+                        <div class="uk-margin">
+                            <select class="uk-select" id="numberOfTransaction" name="numberOfTransaction"
+                                    [(ngModel)]="numberOfTransaction" (change)="load()">
+                                <option value="50">Letzte 50 Transaktionen</option>
+                                <option value="100">Letzte 100 Transaktionen</option>
+                                <option value="500">Letzte 500 Transaktionen</option>
+                            </select>
+                        </div>
+                    </div>
+                </th>
+                <th class="uk-table-shrink">Datum</th>
+                <th class="uk-table-shrink uk-text-right">Betrag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let transaction of futureTransactionList | async | filter:filter"
+                (dblclick)="rowDblClick(transaction)">
+                <td>
+                    <ngx-avatar class="uk-preserve-width" [name]="transaction.recipientName" initialsSize="3"
+                                size="40"></ngx-avatar>
+                </td>
+                <td class="uk-text-truncate uk-text-muted">
+                    {{ transaction.recipientName }} <span class="uk-label">{{ transaction.status }}</span>
+                    <br/> {{ transaction.purpose }}
+                </td>
+                <td class="uk-text-nowrap uk-text-muted">{{ transaction.bookingDate|date:'fullDate' }}</td>
+                <td class="uk-text-nowrap uk-text-right uk-text-muted">{{ (transaction.amount/100 * (transaction.from ?
+                    -1 : 1))|currency:'EUR' }}
+                </td>
+            </tr>
+            <tr *ngFor="let transaction of transactionList | async | filter:filter"
+                (dblclick)="rowDblClick(transaction)">
+                <td>
+                    <ngx-avatar class="uk-preserve-width" [name]="transaction.name" initialsSize="3"
+                                size="40"></ngx-avatar>
+                </td>
+                <td class="uk-text-truncate">
+                    {{ transaction.name }}
+                    <br/> {{ transaction.purpose }}
+                </td>
+                <td class="uk-text-nowrap">{{ transaction.bookingDate|date:'fullDate' }}</td>
+                <td class="uk-text-nowrap uk-text-right">{{ (transaction.amount/100 * (transaction.from ? -1 :
+                    1))|currency:'EUR' }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </li>
+    <li>
+        <table class="uk-table uk-table-striped uk-table-small uk-table-divider">
+            <thead>
+            <tr>
+                <th class="uk-table-shrink"></th>
+                <th class="uk-table-shrink">Name / Verwendungszweck</th>
+                <th class="uk-table-shrink">Status</th>
+                <th class="uk-table-shrink">Wiederholung</th>
+                <th class="uk-table-shrink">Nächste Buchung</th>
+                <th class="uk-table-shrink uk-text-right">Betrag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let standingOrder of standingOrderList | async"
+                (dblclick)="standingOrderRowDblClick(standingOrder)">
+                <td>
+                    <ngx-avatar class="uk-preserve-width" [name]="standingOrder.name" initialsSize="3"
+                                size="40"></ngx-avatar>
+                </td>
+                <td class="uk-text-nowrap">
+                    {{ standingOrder.name }} <br/> {{ standingOrder.description }}
+                </td>
+                <td class="uk-text-nowrap ">
+                    <span class="uk-label">{{ standingOrder.status }}</span>
+                </td>
+                <td class="uk-text-nowrap ">
+                    {{ standingOrder.reoccurrence }}
+                </td>
+                <td class="uk-text-nowrap ">{{ standingOrder.nextOccurrence|date:'fullDate' }}</td>
+                <td class="uk-text-nowrap uk-text-right">{{ (standingOrder.amount/100 * (standingOrder.from ?
+                    -1 : 1))|currency:'EUR' }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </li>
+</ul>

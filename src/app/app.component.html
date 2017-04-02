@@ -1,0 +1,4 @@
+<div *ngIf="isLoading" uk-spinner></div>
+<ng-container *ngIf="!isLoading">
+    <router-outlet></router-outlet>
+</ng-container>

@@ -1,0 +1,59 @@
+<table class="uk-table uk-table-striped uk-table-small uk-table-divider">
+  <tbody>
+
+    <tr>
+      <td>Betrag</td>
+      <td>{{ data.amount }}</td>
+    </tr>
+
+    <tr>
+      <td>IBAN</td>
+      <td>{{ data.iban | iban }}</td>
+    </tr>
+
+    <tr>
+      <td>Name</td>
+      <td>{{ data.name }}</td>
+    </tr>
+
+    <tr>
+      <td>Zweck</td>
+      <td>{{ data.purpose }}</td>
+    </tr>
+
+    <tr>
+      <td>Buchungstyp</td>
+      <td>{{ data.bookingType }}</td>
+    </tr>
+
+    <tr>
+      <td>Zahlungsmethode</td>
+      <td>{{ data.paymentMethod }}</td>
+    </tr>
+
+    <tr>
+      <td>Kategorie</td>
+      <td>{{ data.category }}</td>
+    </tr>
+
+    <tr>
+      <td>Buchungsdatum</td>
+      <td>{{ data.bookingDate }}</td>
+    </tr>
+
+    <tr>
+      <td>Wertstellung</td>
+      <td>{{ data.valutaDate }}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="uk-container uk-padding">
+  <ul uk-accordion>
+    <li>
+      <a class="uk-accordion-title" href="#">Erweiterte Details</a>
+      <div class="uk-accordion-content"><pre>{{data | json}}</pre></div>
+    </li>
+  </ul>
+</div>

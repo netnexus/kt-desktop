@@ -1,0 +1,19 @@
+<form>
+    <legend class="uk-legend">Login</legend>
+
+    <div class="uk-margin">
+        <input class="uk-input" type="text" placeholder="Kontist-Nutzername (E-Mail)" name="username" [(ngModel)]="username" required="required">
+    </div>
+
+    <div class="uk-margin">
+        <input class="uk-input" type="password" placeholder="Passwort" name="password" [(ngModel)]="password" required="required">
+    </div>
+
+    <p class="uk-button-group">
+        <button (click)="submit()" class="uk-button uk-button-primary">Login</button>
+    </p>
+
+    <div *ngIf="errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+</form>

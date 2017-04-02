@@ -1,0 +1,49 @@
+{
+  "appId": "de.netnexus.kt-desktop",
+  "productName": "Kt Desktop",
+  "copyright": "Copyright 2018 NetNexus IT Services",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!.angular-cli.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json"
+  ],
+  "win": {
+    "icon": "dist/assets/images/icon.ico",
+    "legalTrademarks": "Copyright 2019 NetNexus IT Services",
+    "target": [
+      "nsis"
+    ]
+  },
+  "mac": {
+    "category": "public.app-category.finance",
+    "icon": "dist/assets/images/icon.icns",
+    "target": [
+      "dmg",
+      "zip"
+    ]
+  },
+  "linux": {
+    "icon": "dist/assets/images/icon.png",
+    "target": [
+      "AppImage"
+    ]
+  },
+  "publish": {
+    "provider": "s3",
+    "bucket": "de.netnexus.kt-desktop"
+  }
+}

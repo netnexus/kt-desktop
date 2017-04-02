@@ -1,0 +1,65 @@
+<table class="uk-table uk-table-striped uk-table-small uk-table-divider">
+    <tbody>
+
+    <tr>
+        <td>Betrag</td>
+        <td>{{ data.amount }}</td>
+    </tr>
+
+    <tr>
+        <td>IBAN</td>
+        <td>{{ data.iban }}</td>
+    </tr>
+
+    <tr>
+        <td>Name</td>
+        <td>{{ data.name }}</td>
+    </tr>
+
+    <tr>
+        <td>Zweck</td>
+        <td>{{ data.description }}</td>
+    </tr>
+
+    <tr>
+        <td>Wiederholung</td>
+        <td>{{ data.reoccurrence }}</td>
+    </tr>
+
+    <tr>
+        <td>Nächste Buchung</td>
+        <td>{{ data.nextOccurrence }}</td>
+    </tr>
+
+    <tr>
+        <td>Status</td>
+        <td>{{ data.status }}</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<div class="uk-container uk-padding">
+    <ul uk-accordion>
+        <li>
+            <a class="uk-accordion-title" href="#">Erweiterte Details</a>
+            <div class="uk-accordion-content">
+                <pre>{{data | json}}</pre>
+            </div>
+        </li>
+    </ul>
+</div>
+<div *ngIf="data.status != 'CANCELED'" class="uk-container uk-padding">
+    <div *ngIf="errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <div class="uk-margin" [hidden]="!waitForConfirmation">
+        <div class="uk-inline">
+            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+            <input class="uk-input" type="text" placeholder="TAN" [(ngModel)]="tan" name="tan">
+        </div>
+    </div>
+    <button *ngIf="!waitForConfirmation" (click)="stop()" class="uk-button uk-button-primary">Beenden</button>
+    <button *ngIf="waitForConfirmation" (click)="confirm()" class="uk-button uk-button-primary">Bestätigen</button>
+</div>
+

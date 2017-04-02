@@ -1,0 +1,24 @@
+@import "../../../mixins.scss";
+
+table {
+    background: white;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+    @include no-interaction;
+}
+
+.uk-table th {
+    vertical-align: top;
+    border-bottom: 1px solid rgba(20, 4, 4, 0.1);
+    height: 36px;
+}
+
+th {
+    @include no-interaction;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding:12px 12px 0 12px;
+    font-size: 0.875rem;
+}

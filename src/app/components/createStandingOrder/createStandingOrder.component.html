@@ -1,0 +1,94 @@
+<form class="uk-form-horizontal">
+
+    <legend class="uk-legend">Neuer Dauerauftrag</legend>
+
+    <div class="uk-margin">
+        <label class="uk-form-label">Name</label>
+        <div class="uk-form-controls">
+            <ng-autocomplete (selected)="selectRecipient($event)" [group]="group" required="required"></ng-autocomplete>
+        </div>
+
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label">IBAN</label>
+        <div class="uk-form-controls"><input class="uk-input" type="text" placeholder="IBAN (Empfänger)"
+                                             [(ngModel)]="iban" name="iban"
+                                             [disabled]="waitForConfirmation"
+                                             required="required"></div>
+
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label">Betrag</label>
+        <div class="uk-form-controls"><input class="uk-input" type="text" placeholder="Betrag" [(ngModel)]="amount"
+                                             name="amount"
+                                             [disabled]="waitForConfirmation"
+                                             min="0.00" max="50000.00" step="0.01" required="required"
+                                             currencyMask
+                                             [options]="{ prefix: '', suffix: '€', thousands: '.', decimal: ',', allowNegative: false, allowZero: false }"
+        ></div>
+
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label">Verwendungszweck</label>
+        <div class="uk-form-controls"><textarea class="uk-textarea" rows="5" placeholder="Verwendungszweck"
+                                                [(ngModel)]="note" name="note"
+                                                [disabled]="waitForConfirmation"
+                                                required="required"></textarea></div>
+
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label">Startdatum</label>
+        <div class="uk-form-controls"><input type="date" class="uk-input" data-uk-datepicker="{format:'DD.MM.YYYY'}"
+                                             placeholder="Startdatum" [(ngModel)]="firstExecutionDate"
+                                             id="firstExecutionDate" name="firstExecutionDate"
+                                             [disabled]="waitForConfirmation"
+                                             required="required"></div>
+
+    </div>
+
+    <div class="uk-margin uk-form-select">
+        <label class="uk-form-label">Wiederholung</label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="reoccurrence" name="reoccurrence"
+                    [(ngModel)]="reoccurrence" required="required"
+                    [disabled]="waitForConfirmation">
+                <option value="MONTHLY">Monatlich</option>
+                <option value="QUARTERLY">Quartalsweise</option>
+                <option value="EVERY_SIX_MONTHS">Halbjährlich</option>
+                <option value="ANNUALLY">Jährlich</option>
+            </select></div>
+
+    </div>
+
+
+    <div class="uk-margin" [hidden]="!waitForConfirmation">
+        <div class="uk-inline">
+            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+            <input class="uk-input" type="text" placeholder="TAN" [(ngModel)]="tan" name="tan">
+        </div>
+    </div>
+
+
+    <div *ngIf="errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    <p class="uk-button-group">
+        <button (click)="close()" class="uk-button uk-button-default">Abbrechen</button>
+        <button *ngIf="!waitForConfirmation" (click)="submit()" class="uk-button uk-button-primary">Senden</button>
+        <button *ngIf="waitForConfirmation" (click)="confirm()" class="uk-button uk-button-primary">Bestätigen</button>
+    </p>
+
+</form>
+
+<ng-template #dropdownValue let-value let-hightlight="highlight">
+    <div [innerHTML]="hightlight"></div>
+    {{value.original.iban}}
+</ng-template>
+
+<ng-template #placeholderValue let-value>
+    {{value.original.name}}
+</ng-template>

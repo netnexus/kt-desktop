@@ -1,0 +1,35 @@
+<span class="drag"></span>
+
+<ul class="uk-nav uk-nav-default top" *ngFor="let account of accounts | async">
+  <li class="uk-text-right">{{ account.iban|iban }}</li>
+  <li class="uk-text-large uk-text-right">{{ (account.balance/100)|currency:'EUR' }}</li>
+</ul>
+
+<ul class="uk-nav uk-nav-default bottom">
+  <li>
+    <a (click)="openTransferDialog()" class="uk-link-reset">
+      <span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> Neue Überweisung</a>
+  </li>
+  <li>
+    <a (click)="openStandingOrderDialog()" class="uk-link-reset">
+      <span class="uk-margin-small-right" uk-icon="icon: future"></span> Neuer Dauerauftrag</a>
+  </li>
+  <li>
+    <a (click)="refresh()" class="uk-link-reset">
+      <span class="uk-margin-small-right" uk-icon="icon: refresh"></span> Aktualisieren</a>
+  </li>
+  <li>
+    <a (click)="openExportDialog()" class="uk-link-reset">
+      <span class="uk-margin-small-right" uk-icon="icon: download"></span> Export</a>
+  </li>
+  <li>
+    <a (click)="logout()" class="uk-link-reset">
+      <span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Abmelden</a>
+  </li>
+  <li class="uk-text-small uk-text-muted uk-margin-top">
+    <a (click)="whatsnew()">Version: {{ version }}</a>
+  </li>
+</ul>
+<a (click)="openUrlInBrowser();">
+  <img class="logo" src="./assets/images/logo-netnexus.svg"/>
+</a>

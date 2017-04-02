@@ -1,0 +1,43 @@
+@import "../../../mixins.scss";
+
+:host {
+    @include no-interaction;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 280px !important;
+    padding: 0 30px 30px 30px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.drag {
+    height: 40px;
+    -webkit-app-region:drag;
+    display: block;
+}
+
+.top {
+    flex: 1;
+    overflow: auto;
+}
+
+.bottom {
+    height: 200px;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 2em;
+    opacity: .6;
+}
+
+.logo:hover {
+    opacity: 1;
+}

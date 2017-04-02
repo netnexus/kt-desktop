@@ -1,0 +1,4 @@
+@mixin no-interaction {
+  -webkit-user-select: none;
+  cursor: default;
+}

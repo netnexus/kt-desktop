@@ -1,0 +1,35 @@
+@import "../node_modules/uikit/src/scss/variables-theme.scss";
+@import "../node_modules/uikit/src/scss/mixins-theme.scss";
+@import "../node_modules/uikit/src/scss/uikit-theme.scss";
+
+@import "./ng-autocomplete.scss";
+
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+  color: #4D4B51;
+  background:transparent;
+}
+
+a:hover, a.uk-link-reset:hover {
+  color: #5A2FB1!important;
+}
+
+.uk-button-primary {
+  background-color: #5A2FB1!important;
+}
+.uk-button-primary:hover {
+  background-color: #2C1064!important;
+}
+
+.uk-table-striped > tr:nth-of-type(odd), .uk-table-striped tbody tr:nth-of-type(odd) {
+  background: #F5F5F1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.uk-table-striped > tr:nth-of-type(odd):first-child, .uk-table-striped tbody tr:nth-of-type(odd):first-child {
+  border-top:none;
+}
