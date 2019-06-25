@@ -1,7 +1,7 @@
 {
   "appId": "de.netnexus.kt-desktop",
   "productName": "Kt Desktop",
-  "copyright": "Copyright 2018 NetNexus IT Services",
+  "copyright": "Copyright 2019 NetNexus IT Services",
   "directories": {
     "output": "release/"
   },
